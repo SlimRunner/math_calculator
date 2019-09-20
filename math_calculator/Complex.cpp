@@ -1,11 +1,3 @@
 #include "Complex.h"
 
-slmath::Complex::Complex()
-{
-
-}
-
-slmath::Complex::~Complex()
-{
-
-}
+/*Do I not need this?*/
