@@ -19,7 +19,8 @@ namespace slmath
 		Complex() noexcept : real_m(0), imag_m(0) {};
 		Complex(T real, T imag) noexcept : real_m(real), imag_m(imag) {};
 
-		~Complex() noexcept {};
+		//allow default move semantics
+		//~Complex() noexcept {};
 
 		/********* ACCESSORS **********/
 
@@ -61,7 +62,11 @@ namespace slmath
 
 		/********** METHODS ***********/
 
-		//conjugate
+		Complex<T> conjugate()
+		{
+			Complex<T> conj(real_m, -imag_m);
+			return conj;
+		}
 
 		/********* OPERATORS **********/
 

@@ -4,6 +4,7 @@
 int main()
 {
 	slmath::Complex<int> myNum(2, 3);
+	myNum = myNum.conjugate();
 	int userInput;
 
 	std::cout << "Entry point..." << std::endl;
