@@ -71,6 +71,31 @@ namespace slmath
 		/********* OPERATORS **********/
 
 		//addition
+		Complex<T> operator + (const Complex<T> rhs) const
+		{
+			Complex<T> temp(*this);
+			temp.real_m = real_m + rhs.real_m;
+			temp.imag_m = imag_m + rhs.imag_m;
+			return temp;
+		}
+
+		template <class Op>
+		Complex<T> operator + (Op rhs) const
+		{
+			Complex<T> temp(*this);
+			temp.real_m = real_m + rhs;
+			return temp;
+		}
+
+		template <class Op>
+		friend Complex<T> operator + (Op rhs, const Complex<T>& lhs)
+		{
+			Complex<T> temp(lhs);
+			temp.real_m = lhs.real_m + rhs;
+			return temp;
+		}
+
+
 		//subtraction
 		//multiplication
 		//division
