@@ -57,12 +57,23 @@ namespace slmath
 		void set_polar(double abs, double arg)
 		{
 			real_m = static_cast<T>(abs * cos(arg));
-			real_m = static_cast<T>(abs * sin(arg));
+			imag_m = static_cast<T>(abs * sin(arg));
+		}
+
+		void negate()
+		{
+			real_m *= -1;
+			imag_m *= -1;
+		}
+
+		void conjugate()
+		{
+			imag_m *= -1;
 		}
 
 		/********** METHODS ***********/
 
-		Complex<T> conjugate()
+		Complex<T> get_conjugate()
 		{
 			Complex<T> conj(real_m, -imag_m);
 			return conj;
@@ -74,8 +85,8 @@ namespace slmath
 		Complex<T> operator + (const Complex<T> rhs) const
 		{
 			Complex<T> temp(*this);
-			temp.real_m = real_m + rhs.real_m;
-			temp.imag_m = imag_m + rhs.imag_m;
+			temp.real_m += rhs.real_m;
+			temp.imag_m += rhs.imag_m;
 			return temp;
 		}
 
@@ -83,22 +94,100 @@ namespace slmath
 		Complex<T> operator + (Op rhs) const
 		{
 			Complex<T> temp(*this);
-			temp.real_m = real_m + rhs;
+			temp.real_m += rhs;
 			return temp;
 		}
 
 		template <class Op>
-		friend Complex<T> operator + (Op rhs, const Complex<T>& lhs)
+		friend Complex<T> operator + (Op lhs, const Complex<T>& rhs)
 		{
-			Complex<T> temp(lhs);
-			temp.real_m = lhs.real_m + rhs;
+			Complex<T> temp(rhs);
+			temp.real_m += lhs;
 			return temp;
 		}
 
-
 		//subtraction
+		Complex<T> operator - (const Complex<T> rhs) const
+		{
+			Complex<T> temp(*this);
+			temp.real_m -= rhs.real_m;
+			temp.imag_m -= rhs.imag_m;
+			return temp;
+		}
+
+		template <class Op>
+		Complex<T> operator - (Op rhs) const
+		{
+			Complex<T> temp(*this);
+			temp.real_m -= rhs;
+			return temp;
+		}
+
+		template <class Op>
+		friend Complex<T> operator - (Op lhs, const Complex<T>& rhs)
+		{
+			Complex<T> temp(rhs);
+			temp.negate();
+			temp.real_m += lhs;
+			return temp;
+		}
+
 		//multiplication
+		Complex<T> operator * (const Complex<T> rhs) const
+		{
+			Complex<T> temp;
+			temp.real_m = real_m * rhs.real_m - imag_m * rhs.imag_m;
+			temp.imag_m = real_m * rhs.imag_m + imag_m * rhs.real_m;
+			return temp;
+		}
+
+		template <class Op>
+		Complex<T> operator * (Op rhs) const
+		{
+			Complex<T> temp(*this);
+			temp.real_m *= rhs;
+			temp.imag_m *= rhs;
+			return temp;
+		}
+
+		template <class Op>
+		friend Complex<T> operator * (Op lhs, const Complex<T>& rhs)
+		{
+			Complex<T> temp(rhs);
+			temp.real_m *= lhs;
+			temp.imag_m *= lhs;
+			return temp;
+		}
+
 		//division
+		Complex<T> operator / (const Complex<T> rhs) const
+		{
+			Complex<T> temp;
+			double denom = rhs.real_m * rhs.real_m + rhs.imag_m * rhs.imag_m;
+			temp.real_m = (real_m * rhs.real_m + imag_m * rhs.imag_m) / denom;
+			temp.imag_m = (imag_m * rhs.real_m - real_m * rhs.imag_m) / denom;
+			return temp;
+		}
+
+		template <class Op>
+		Complex<T> operator / (Op rhs) const
+		{
+			Complex<T> temp(*this);
+			temp.real_m /= rhs;
+			temp.imag_m /= rhs;
+			return temp;
+		}
+
+		template <class Op>
+		friend Complex<T> operator / (Op lhs, const Complex<T>& rhs)
+		{
+			Complex<T> temp;
+			double denom = rhs.real_m * rhs.real_m + rhs.imag_m * rhs.imag_m;
+			temp.real_m = (lhs * rhs.real_m) / denom;
+			temp.imag_m = (lhs * rhs.imag_m) / -denom;
+			return temp;
+		}
+
 		//pow 2
 		//RE(sqrt)
 
