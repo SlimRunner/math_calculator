@@ -3,9 +3,9 @@
 
 int main()
 {
-	slmath::Complex<double> myNum(2, 3);
-	slmath::Complex<double> myNum2(4, 7);
-	slmath::Complex<double> myNum3 = myNum2 / myNum;
+	slmath::Complex myNum(2, 3);
+	slmath::Complex myNum2(4, 7);
+	slmath::Complex myNum3 = myNum2 / myNum;
 	myNum3 = myNum3 * myNum3;
 	myNum = myNum.get_conjugate();
 	int userInput;
