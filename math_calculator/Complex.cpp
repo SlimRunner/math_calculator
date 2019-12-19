@@ -51,6 +51,16 @@ Complex Complex::get_conjugate()
 	return conj;
 }
 
+Complex slmath::Complex::pow2()
+{
+	Complex temp(
+		real_m * real_m - imag_m * imag_m,
+		2 * real_m * imag_m
+	);
+
+	return temp;
+}
+
 Complex Complex::operator + (const Complex rhs) const
 {
 	Complex temp(*this);

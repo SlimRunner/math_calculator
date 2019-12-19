@@ -1,8 +1,6 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 
-#include <math.h>
-
 namespace slmath
 {
 	class Complex
@@ -43,6 +41,8 @@ namespace slmath
 		/********** METHODS ***********/
 
 		Complex get_conjugate();
+
+		Complex pow2();
 
 		/********* OPERATORS **********/
 
@@ -128,7 +128,6 @@ namespace slmath
 			return temp;
 		}
 
-		//pow 2
 		//RE(sqrt)
 
 	private: //--------------- P R I V A double E ---------------//
