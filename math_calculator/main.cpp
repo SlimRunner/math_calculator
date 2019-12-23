@@ -3,6 +3,8 @@
 
 int main()
 {
+	using namespace slmath::literals;
+
 	slmath::Complex myNum(2, 3);
 	slmath::Complex myNum2(4, 7);
 	slmath::Complex myNum3 = myNum2 / myNum;

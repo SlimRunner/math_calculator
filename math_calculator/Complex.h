@@ -143,7 +143,23 @@ namespace slmath
 		/****** MEMBER FUNCTIONS ******/
 
 
-	};
-}
+	}; // !Complex
+
+	namespace literals
+	{
+		Complex operator "" _i(long double num)
+		{
+			Complex retval(0, num);
+			return retval;
+		}
+
+		Complex operator "" _i(unsigned long long int num)
+		{
+			Complex retval(0, num);
+			return retval;
+		}
+	}
+
+} // !slmath
 
 #endif // !COMPLEX_H
